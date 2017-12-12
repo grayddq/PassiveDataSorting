@@ -3,7 +3,7 @@ import scapy_http.http as HTTP
 from scapy.all import *
 from filter import *
 from config import *
-import time, hashlib
+import time, hashlib, redis
 
 
 class Capute():
@@ -34,7 +34,6 @@ class Capute():
                                         'ng_request_url_short': ng_request_url_short,
                                         'arg': body}
                         time.sleep(0.01)
-                        # print request_json
             elif (request_py.Method == "GET"):
                 if request_py.Path.find('?') > 0:
                     query, ng_request_url_short = \
@@ -47,7 +46,6 @@ class Capute():
                                         'ng_request_url_short': ng_request_url_short,
                                         'arg': query}
                         time.sleep(0.01)
-                        # print request_json
             else:
                 pass
             if request_json:

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-\
-import re, redis
+import re
 
 
 class Filter():

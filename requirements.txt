@@ -1,0 +1,3 @@
+redis==2.10.5
+scapy==2.3.3
+scapy_http==1.8
