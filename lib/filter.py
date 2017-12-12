@@ -18,7 +18,7 @@ class Filter():
         # 排除重复接口,直接借助redis[KEY,VAULE]
         self.rules = [
             {'field': 'method', 'rule': '^(GE|POS)T$', 'remarks': '方法过滤', 'action': 'open'},
-            {'field': 'protocol', 'rule': '^http(|s)://$', 'remarks': '协议过滤', 'action': 'open'},
+            {'field': 'protocol', 'rule': '^http://$', 'remarks': '协议过滤', 'action': 'open'},
             {'field': 'ng_request_url_short',
              'rule': '(.+)\.(htm|html|ico|mp3|js|jpg|jped|gif|xml|zip|css|png|txt|ttf|rar|gz)$', 'remarks': '排除静态文件',
              'action': 'lock'},
