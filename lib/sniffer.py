@@ -10,7 +10,7 @@ class Capute():
     def __init__(self):
         self.port = 80
         self.redis_r = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD, db=REDIS_DB)
-        self.rules = self.redis_r.hget('passive_config', 'conf_sniffer_rule') \
+        self.rules = eval(self.redis_r.hget('passive_config', 'conf_sniffer_rule')) \
             if 'conf_sniffer_rule' in self.redis_r.hkeys('passive_config') else []
 
     def md5(self, str):
@@ -26,6 +26,7 @@ class Capute():
                 if 'application/x-www-form-urlencoded' in pkt[HTTP.HTTPRequest].fields['Content-Type'].strip().lower() \
                         and int(pkt[HTTP.HTTPRequest].fields['Content-Length'].strip().lower()) > 0:
                     headers, body = str(request_py).split("\r\n\r\n", 1)
+                    # 不允许参数为空
                     if len(body) > 0:
                         host, ng_request_url_short = request_py.Host, request_py.Path
                         request_json = {'method': 'POST',
@@ -38,6 +39,7 @@ class Capute():
                 if request_py.Path.find('?') > 0:
                     query, ng_request_url_short = \
                         request_py.Path[request_py.Path.find('?') + 1:], request_py.Path[0:request_py.Path.find('?')]
+                    # 不允许参数为空
                     if query and ng_request_url_short:
                         host = request_py.Host
                         request_json = {'method': 'POST',
@@ -49,8 +51,9 @@ class Capute():
             else:
                 pass
             if request_json:
-                if Filter(request_json, self.rules): return
-                MD5 = self.md5(request_json['method'] + request_json['ng_request_url_short'])
+                if Filter(request_json, self.rules).filter():
+                    return
+                MD5 = self.md5(request_json['method'] + request_json['ng_request_url_short'].split('?')[0])
                 self.redis_r.set('DataSort_' + MD5, request_json)
 
     def run(self):
