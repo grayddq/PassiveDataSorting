@@ -2,7 +2,7 @@
 # redis信息
 REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
-REDIS_PASSWORD = '1111'
+REDIS_PASSWORD = '11111'
 REDIS_DB = 5
 
 # field 代表5元素中字段名称，method/protocol/domain/ng_request_url_short/arg
