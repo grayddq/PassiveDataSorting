@@ -59,7 +59,7 @@ class Capute():
     def run(self):
         while True:
             try:
-                sniff(filter='tcp and port %d' % self.port, prn=self.pktTCP, store=1)
+                sniff(filter='tcp and port %d' % self.port, prn=self.pktTCP, store=0)
             except BaseException, e:
                 print e
 
