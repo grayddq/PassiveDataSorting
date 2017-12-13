@@ -5,6 +5,8 @@ from filter import *
 from config import *
 import time, hashlib, redis
 
+NAME, VERSION, AUTHOR, LICENSE = "PublicDataSorting", "V0.1", "咚咚呛", "Public (FREE)"
+
 
 class Capute():
     def __init__(self):

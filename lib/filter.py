@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-\
 import re
 
+NAME, VERSION, AUTHOR, LICENSE = "PublicDataSorting", "V0.1", "咚咚呛", "Public (FREE)"
+
 
 class Filter():
     def __init__(self, target, rules):
