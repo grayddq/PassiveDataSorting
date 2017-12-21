@@ -25,7 +25,7 @@
 	4、自定义url过滤规则保存在redis的中，可动态修改，支持如下：匹配任意五元素，进行放行、拦截、替换等操作，如去静态资源、去相似url、去敏感域名等。
 	5、去重过滤，计算出MD5(方法+接口)值，利用redis唯一key进行去重
 	6、结果redis存储Key是去重md5值，VALUE是json存储的五元素
-	7、结果为反复覆盖是存储，可保持请求最新
+	7、结果为反复覆盖式存储，可保持请求最新
 
 
 ## Test Environment ##
@@ -42,8 +42,6 @@
 
 ## Deploy ##
 	
-	部署分为两块，一个扫描任务执行Worker、一个是ssrf漏洞验证Worker
-
 	1、任意机子安装redis
 	$ yum install redis
 	$ vim /etc/redis.conf
